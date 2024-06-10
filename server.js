@@ -18,4 +18,4 @@ const wb = new SocketServer({connectionOpenCallback: (socket) => {
     index++;
     socket.send(JSON.stringify({type: 'assign-index', data: index}));
     broadcast(null, {type: 'player-connect', data: index});
-}, messageHandlers: {'player-update': broadcast}});
+}, messageHandlers: {'player-move': broadcast}});
