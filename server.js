@@ -1,4 +1,4 @@
-const redweb = require('redweb');
+const { SocketServer } = require('redweb');
 
 var index = -1;
 
@@ -14,10 +14,8 @@ const broadcast = (socket, data) => {
     });
 }
 
-const wb = new redweb.SocketServer({connectionOpenCallback: (socket) => {
+const wb = new SocketServer({connectionOpenCallback: (socket) => {
     index++;
     socket.send(JSON.stringify({type: 'assign-index', data: index}));
     broadcast(null, {type: 'player-connect', data: index});
-}});
-
-wb.messageHandlers['player-move'] = broadcast;
+}, messageHandlers: {'player-move': broadcast}});
